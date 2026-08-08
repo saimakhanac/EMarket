@@ -1,0 +1,23 @@
+{
+  "name": "emarket",
+  "version": "1.0.0",
+  "description": "eCommerce application built with the MERN stack",
+  "homepage": "https://github.com/saimakhanac/EMarket#readme",
+  "bugs": {
+    "url": "https://github.com/saimakhanac/EMarket/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saimakhanac/EMarket.git"
+  },
+  "license": "MIT",
+  "author": "Saima",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
