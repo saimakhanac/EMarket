@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import products from "../products";
+// import products from "../products";
+import axios from "axios";
+
 import {
   Button,
   Card,
@@ -13,9 +15,19 @@ import {
 import Rating from "../components/Rating";
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({});
   const { id: productId } = useParams();
-  const product = products.find((p) => p._id === productId);
+  // const product = products.find((p) => p._id === productId);
   console.log(product);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`);
+      setProduct(data);
+      console.log("data", data);
+    };
+    fetchProduct();
+  }, [productId]);
+
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
@@ -37,8 +49,7 @@ const ProductScreen = () => {
               />
             </ListGroup.Item>
             <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-            <ListGroup.Item>Price: ${product.description}</ListGroup.Item>
-
+            <ListGroup.Item>Description: {product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
@@ -57,7 +68,6 @@ const ProductScreen = () => {
                   <Col>Status:</Col>
                   <Col>
                     <strong>
-                      $
                       {product.countInStock > 0 ? "In stock" : "Out Of  Stock"}
                     </strong>
                   </Col>
