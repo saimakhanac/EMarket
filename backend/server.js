@@ -1,7 +1,10 @@
+import dns from "dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./config/db.js";
+import { notFound, errorhandler } from "./middleware/errorMiddleware.js";
 
 import productRoutes from "./routes/productRoutes.js";
 const port = process.env.PORT || 5000;
@@ -14,5 +17,8 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 app.use("/api/products", productRoutes);
+
+app.use(notFound);
+app.use(errorhandler);
 
 app.listen(port, () => console.log(`Server is running on ${port}`));
