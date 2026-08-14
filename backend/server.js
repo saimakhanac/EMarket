@@ -2,6 +2,7 @@ import dns from "dns";
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 import connectDB from "./config/db.js";
 import { notFound, errorhandler } from "./middleware/errorMiddleware.js";
@@ -17,7 +18,10 @@ const app = express();
 
 // Body Parser middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }));
+
+// Cookie parser middleware
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API is running...");
