@@ -9,11 +9,13 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart);
-  const { ShippingAddress } = cart;
-  const [address, setAddress] = useState(ShippingAddress?.address || "");
-  const [city, setCity] = useState(ShippingAddress?.address || "");
-  const [postalCode, setPostalCode] = useState(ShippingAddress?.address || "");
-  const [country, setCountry] = useState(ShippingAddress?.address || "");
+  const { shippingAddress } = cart;
+  const [address, setAddress] = useState(shippingAddress?.address || "");
+  const [city, setCity] = useState(shippingAddress?.city || "");
+  const [postalCode, setPostalCode] = useState(
+    shippingAddress?.postalCode || "",
+  );
+  const [country, setCountry] = useState(shippingAddress?.country || "");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
